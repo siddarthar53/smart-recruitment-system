@@ -1,0 +1,110 @@
+.profile {
+    width: 60%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+    margin-top: 10px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+.profile-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profile-header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-section {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background: #f1f1f1;
+}
+
+.profile-section h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-section p {
+    font-size: 14px;
+}
+
+.education-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.education-table th, .education-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.education-table th {
+    background: #f1f1f1;
+    font-weight: bold;
+}
+
+.additional-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.additional-info label {
+    font-weight: bold;
+}
+
+.info-box {
+    margin-top: 5px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.button-group {
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+    justify-content: center;
+}
+
+.button-group button {
+    width: 45%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.contact-btn {
+    background: black;
+    color: white;
+}
+
+.download-btn {
+    background: black;
+    color: white;
+}

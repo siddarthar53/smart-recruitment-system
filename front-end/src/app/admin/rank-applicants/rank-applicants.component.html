@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <!-- Job Selection Dropdown -->
+  <div class="card p-4 mb-4 shadow-lg border-0 bg-dark text-white">
+    <label for="jobSelect" class="form-label fw-bold text-white">Select Job Title</label>
+    <select id="jobSelect" class="form-control border-0 shadow-sm bg-light text-dark" (change)="onJobSelect($event)">
+      <option value="" disabled selected>Select a Job</option>
+      <option *ngFor="let job of jobTitles" [value]="job">{{ job }}</option>
+    </select>
+  </div>
+  
+  <!-- Rank Applicants Button -->
+  <div *ngIf="selectedJob">
+    <button class="rank-btn" (click)="rankApplicants()">Rank Applicants</button>
+  </div>
+
+  <!-- Loader (Displayed while fetching data) -->
+  <div *ngIf="loading" class="text-center mt-3">
+    <p class="fw-bold text-dark">Ranking Applicants...</p>
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <!-- Applicants Ranking Table (Only show when data is received) -->
+  <div *ngIf="showRankedApplicants" class="card p-4 shadow-lg border-0 bg-white mt-3">
+    <h2 class="h4 fw-bold text-dark mb-3">Ranked Applicants</h2>
+    <table class="table table-bordered rounded overflow-hidden">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th scope="col" class="text-center">Check Box</th>
+          <th scope="col" class="text-center">Rank</th>
+          <th scope="col" class="text-center">Applicant Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let applicant of applicants; let i = index" class="bg-light text-dark hover-effect">
+          <td class="text-center">
+            <input 
+              type="checkbox" 
+              [checked]="applicant.selected" 
+              (change)="onCheckboxChange($event, i)" 
+              name="selected{{i}}"
+            />
+          </td>    
+          <td class="text-center fw-semibold text-primary">{{ i + 1 }}</td>
+          <td class="text-center text-secondary">{{ applicant.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="shortlist" (click)="shortlistApplicants()">Shortlist</button>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="view-job-container">
+    <h1>Job Details</h1>
+
+    <div class="job-header">
+        <div class="job-img">
+            <img src="../../../assets/Full-Stack-banner.jpg" alt="banner image">
+        </div>
+
+        <div class="job-info">
+            <h2>{{ job?.jobTitle }}</h2>
+            <span class="badge"><i class="fa-solid fa-briefcase"></i> {{ job?.jobType }}</span>
+        </div>
+    </div>
+
+    <div class="job-content">
+        <!-- Job Details Sidebar -->
+        <div class="job-details-sidebar">
+            <p><i class="fa-solid fa-location-dot"></i> LOCATION <span>{{ job?.location }}</span></p>
+            <p><i class="fa-solid fa-dollar-sign"></i> SALARY <span>{{ job?.salary }}</span></p>
+            <p><i class="fa-solid fa-shield-alt"></i> ELIGIBILITY <span>{{ job?.eligibility }}</span></p>
+            <p><i class="fa-solid fa-clock"></i> POSTED <span>{{ job?.createdAt }}</span></p>
+            <p><i class="fa-solid fa-users"></i> NO OF OPENINGS <span>{{ job?.eligibility}}</span></p>
+        </div>
+
+        <!-- Job Description and Skills -->
+        <div class="job-details-content">
+            <div class="job-desc">
+                <h3>Job Description</h3>
+                <p>{{ job?.jobDescription }}</p>
+            </div>
+            <div class="job-skills">
+                <h3>Skills Required</h3>
+                <p>{{ job?.skillsRequired }}</p>
+            </div>
+
+            <!-- Conditionally Render Apply Section (Only for Users) -->
+            <div *ngIf="userRole === 'user'" class="apply-section">
+                <label for="resume">Select Resume:</label>
+                <select id="resume" [(ngModel)]="selectedResume">
+                    <option *ngFor="let resume of userResumes" [value]="resume">{{ resume }}</option>
+                </select>
+                <button class="apply-btn" (click)="applyForJob()">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

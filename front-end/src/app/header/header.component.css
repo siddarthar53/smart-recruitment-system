@@ -1,0 +1,107 @@
+/* === COMMON HEADER STYLES === */
+.header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-bottom: 3px solid #1976D2; /* Blue underline */
+}
+
+/* === COMMON LEFT SECTION (Greeting + Icon) === */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.header-left i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+/* === DARK/LIGHT MODE ICONS === */
+.fa-sun {
+    color: orange;
+}
+
+.fa-moon {
+    color: black;
+}
+
+/* === COMMON NAVIGATION LINKS === */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1976D2;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #ff9800; /* Yellow hover effect */
+}
+
+/* === COMMON RIGHT SECTION (TIME + LOGOUT) === */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-right h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* === COMMON LOGOUT BUTTON === */
+.logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #cc0000;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

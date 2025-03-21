@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="operations">
+        <div class="sort">
+            <button>Sort</button>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search...">
+        </div>
+    </div>
+    
+    <div class="jobs-container">
+        <ul>
+            <li *ngFor="let job of jobs" (click)="navigateToJobDetails(job._id)">
+                <div class="job pointer">
+                    <div class="job-img">
+                        <img src="../../../assets/job-placeholder.jpg" alt="Job Image" width="100px" height="100px">
+                    </div>
+                    <div class="job-text">
+                        <h4>{{ job?.jobTitle }}</h4>
+                        <div class="details">
+                            <p><i class="fa-solid fa-location-dot"></i> {{ job?.location }}</p>
+                            <p><i class="fa-solid fa-dollar-sign"></i> {{ job?.salary }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Show delete button only for Admin -->
+                    <div class="job-delete" *ngIf="userRole === 'admin'">
+                        <button (click)="deleteJob(job._id, $event)"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

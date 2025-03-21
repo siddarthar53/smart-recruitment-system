@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <h2 class="text-center fw-bold text-dark">Welcome to Your Dashboard</h2>
+    <p class="text-center text-muted">Manage your job applications and resumes in one place.</p>
+  
+    <div class="dashboard-grid mt-4">
+      
+      <!-- View Jobs -->
+      <div class="dashboard-card" (click)="navigateTo('view-jobs')">
+        <div class="card-content">
+          <i class="fas fa-briefcase dashboard-icon"></i>
+          <h5>View Jobs</h5>
+          <p>Explore job opportunities and apply.</p>
+        </div>
+      </div>
+  
+      <!-- Upload Resume -->
+      <div class="dashboard-card" (click)="navigateTo('save-resume')">
+        <div class="card-content">
+          <i class="fas fa-upload dashboard-icon"></i>
+          <h5>Upload Resume</h5>
+          <p>Manage and store your resumes.</p>
+        </div>
+      </div>
+  
+      <!-- My Applications -->
+      <div class="dashboard-card" (click)="navigateTo('applications')">
+        <div class="card-content">
+          <i class="fas fa-list-alt dashboard-icon"></i>
+          <h5>My Applications</h5>
+          <p>Track your applications and interviews.</p>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  

@@ -1,0 +1,98 @@
+/* Container Styling (Similar to Header) */
+.add-job-container {
+    width: 80%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #1976D2;
+}
+
+/* Header Title */
+.header-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 15px;
+}
+
+/* Form Section */
+.form-section {
+    background-color: rgba(211, 211, 211, 0.523);
+    padding: 20px;
+    border-top: 3px solid black;
+    border-radius: 5px;
+}
+
+/* Form Group - Grid Layout */
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Form Items */
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-item input, .form-item select, .form-item textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Job Description - Full Width */
+.full-width {
+    grid-column: span 2;
+}
+
+/* File Input */
+.form-item input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.form-item p {
+    font-size: 12px;
+    color: gray;
+    margin-top: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+    background: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    width: 200px;
+    margin-top: 10px;
+    display: block;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+}

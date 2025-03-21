@@ -1,0 +1,44 @@
+.sidenav-container {
+    height: 100vh;
+  }
+  
+  .sidenav {
+    padding-top: 20px;
+    width: 200px;
+    background: #f4f4f4;
+  }
+  
+  mat-toolbar {
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 15px;
+  }
+  
+  mat-nav-list a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  mat-nav-list a mat-icon {
+    margin-right: 8px;
+  }
+  
+  .content {
+    padding: 16px;
+  }
+
+  button:focus {
+    
+    outline: none;
+  }
+  
+  button:focus-visible {
+    outline: none;
+  }
+  
+  

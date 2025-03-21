@@ -1,0 +1,49 @@
+<div class="add-job-container">
+    <h2 class="header-title">SUBMIT A JOB</h2>
+
+    <div class="form-section">
+        <div class="form-group">
+            <div class="form-item">
+                <label>JOB TITLE</label>
+                <input type="text" [(ngModel)]="title" placeholder="Enter Job Title">
+            </div>
+            <div class="form-item">
+                <label>LOCATION (OPTIONAL)</label>
+                <input type="text" [(ngModel)]="location" placeholder="e.g. 'Canada'">
+            </div>
+            <div class="form-item">
+                <label>JOB TYPE</label>
+                <select [(ngModel)]="jobType">
+                    <option>Full Time</option>
+                    <option>Part Time</option>
+                    <option>Internship</option>
+                </select>
+            </div>
+            <div class="form-item">
+                <label>SALARY</label>
+                <input type="text" [(ngModel)]="salary" placeholder="e.g. $20,000">
+            </div>
+            <div class="form-item">
+                <label>ELIGIBILITY</label>
+                <input type="text" [(ngModel)]="eligibility" placeholder="e.g. 3 Years">
+            </div>
+            <div class="form-item">
+                <label>SKILLS REQUIRED</label>
+                <input type="text" [(ngModel)]="skillsRequired" placeholder="e.g. JavaScript, Python, AWS">
+            </div>
+        </div>
+
+        <div class="form-item full-width">
+            <label>JOB DESCRIPTION</label>
+            <textarea rows="4" [(ngModel)]="jobDescription" placeholder="Enter job description"></textarea>
+        </div>
+
+        <div class="form-item full-width">
+            <label>JOB BANNER IMAGE</label>
+            <input type="file" (change)="onFileSelected($event)">
+            <p>Max file size 2 MB. Allowed file format: JPG, PNG</p>
+        </div>
+
+        <button class="submit-btn" (click)="onSubmit()">SUBMIT A JOB</button>
+    </div>
+</div>

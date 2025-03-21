@@ -1,0 +1,53 @@
+<div class="container mt-5">
+    <div class="card p-4 shadow-lg border-0 bg-white">
+      
+      <!-- Job Banner Image -->
+      <div class="text-center mb-4">
+        <img [src]="jobBanner" alt="Job Banner" width="200px" height="200px" class="job-banner img-fluid rounded">
+      </div>
+  
+      <!-- Job Information -->
+      <div class="mb-4 text-center">
+        <h2 class="h4 fw-bold text-dark">{{ interview.jobTitle }}</h2>
+        <p class="text-secondary"><strong>${{ interview.salary }}</strong> per year</p>
+      </div>
+  
+      <!-- Progress Bar for Status -->
+      <div class="progress my-4">
+        <div class="progress-bar" [ngStyle]="{'width': progressWidth}" [ngClass]="progressClass">
+          {{ interview.status }}
+        </div>
+      </div>
+  
+      <!-- Countdown Timer -->
+      <div class="mb-3 text-center">
+        <h5 class="fw-bold text-dark">Time Remaining:</h5>
+        <p class="text-danger fw-bold">{{ timeRemaining }}</p>
+      </div>
+  
+      <!-- Interview Details -->
+      <div class="interview-info">
+        <div class="mb-3">
+          <h5 class="fw-bold text-dark">Interview Date:</h5>
+          <p class="text-secondary">{{ interview.date }}</p>
+        </div>
+      
+        <div class="mb-3">
+          <h5 class="fw-bold text-dark">Time Slot:</h5>
+          <p class="text-secondary">{{ interview.timeSlot }}</p>
+        </div>
+      
+        <div class="mb-3">
+          <h5 class="fw-bold text-dark">Google Meet Link:</h5>
+          <a [href]="interview.meetLink" target="_blank" class="meet-link">Join Meeting</a>
+        </div>
+      </div>
+  
+      <!-- Add to Google Calendar -->
+      <div class="mt-4 text-center">
+        <a [href]="googleCalendarLink" target="_blank" class="calendar-link">📅 Add to Google Calendar</a>
+      </div>
+  
+    </div>
+  </div>
+  

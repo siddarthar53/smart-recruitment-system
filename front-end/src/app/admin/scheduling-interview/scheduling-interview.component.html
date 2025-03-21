@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <!-- Job Title -->
+    <div class="card p-4 mb-4 shadow-lg border-0 bg-dark text-white">
+      <h2 class="h4 fw-bold">Schedule Interviews for {{ jobTitle }}</h2>
+    </div>
+  
+    <!-- Shortlisted Applicants Table -->
+    <div class="card p-4 shadow-lg border-0 bg-white">
+      <h3 class="h5 fw-bold text-dark mb-3">Shortlisted Applicants</h3>
+      <table class="table table-bordered rounded overflow-hidden">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let applicant of shortlistedApplicants" class="bg-light text-dark hover-effect">
+            <td class="text-center text-secondary">{{ applicant.name }}</td>
+            <td class="text-center text-secondary">{{ applicant.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Interview Scheduling Form -->
+    <div class="card p-4 shadow-lg border-0 bg-white mt-3">
+      <h3 class="h5 fw-bold text-dark mb-3">Interview Details</h3>
+      
+      <!-- Email Subject -->
+      <label class="form-label fw-bold text-dark">Email Subject</label>
+      <input type="text" class="form-control border-0 shadow-sm bg-light text-dark" [(ngModel)]="emailSubject" placeholder="Enter email subject">
+  
+      <!-- Google Meet Link -->
+      <label class="form-label fw-bold text-dark mt-3">Google Meet Link</label>
+      <input type="text" class="form-control border-0 shadow-sm bg-light text-dark" [(ngModel)]="googleMeetLink" placeholder="Paste Google Meet link here">
+  
+      <!-- Time Slot Dropdown -->
+      <label class="form-label fw-bold text-dark mt-3">Select Interview Time Slot</label>
+      <select class="form-control border-0 shadow-sm bg-light text-dark" [(ngModel)]="timeSlot">
+        <option value="" disabled selected>Select Time Slot</option>
+        <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+      </select>
+  
+      <!-- Send Invitations Button -->
+      <button class="shortlist mt-3" (click)="sendInvites()">Send Invitations</button>
+    </div>
+  </div>
+  

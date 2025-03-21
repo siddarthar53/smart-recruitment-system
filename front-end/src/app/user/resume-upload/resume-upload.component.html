@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <!-- Resume Upload Form -->
+    <div class="card p-4 shadow-lg border-0 bg-white">
+      <h2 class="h4 fw-bold text-dark mb-3">Upload Resume</h2>
+      
+      <label class="form-label fw-bold text-dark">Resume Title</label>
+      <input type="text" class="form-control border-0 shadow-sm bg-light text-dark" [(ngModel)]="resumeTitle" placeholder="Enter Resume Title">
+      
+      <label class="form-label fw-bold text-dark mt-3">Upload Resume File</label>
+      <input type="file" class="form-control border-0 shadow-sm bg-light text-dark" (change)="onFileUpload($event)">
+  
+      <button class="upload-btn mt-3" (click)="saveResume()">Upload</button>
+      
+      <p *ngIf="uploadMessage" class="text-success fw-bold mt-2">{{ uploadMessage }}</p>
+    </div>
+  
+    <!-- Saved Resumes Block -->
+    <div class="card p-4 shadow-lg border-0 bg-white mt-4">
+      <h2 class="h4 fw-bold text-dark mb-3">Saved Resumes</h2>
+      
+      <ul class="list-group">
+        <li *ngFor="let resume of savedResumes" class="list-group-item d-flex justify-content-between align-items-center">
+          <a href="#" (click)="viewResume(resume.url)" class="resume-link">{{ resume.title }}</a>
+          <button class="delete-btn" (click)="deleteResume(resume.title)">🗑 Delete</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Resume PDF Viewer -->
+    <div *ngIf="selectedResume" class="card p-4 shadow-lg border-0 bg-white mt-4">
+      <h2 class="h4 fw-bold text-dark mb-3">Viewing: {{ selectedResumeTitle }}</h2>
+      <iframe [src]="selectedResume" class="resume-viewer"></iframe>
+    </div>
+  </div>
+  

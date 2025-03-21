@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="content">
+        <div class="feature" *ngFor="let feature of features">
+            <h4>{{ feature.title }}</h4>
+            <ul>
+                <li *ngFor="let item of feature.items" (click)="navigateTo(item.route)">
+                    {{ item.name }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer row text-center">
+        <p class="col pointer"><b>Contact us</b></p>
+        <div class="col social-media">
+            <div class="row justify-content-center">
+                <i class="fa-brands fa-instagram pointer"></i>
+                <i class="fa-brands fa-instagram pointer"></i>
+                <i class="fa-brands fa-instagram pointer"></i>
+            </div>
+        </div>
+        <p class="col"><b>Copyright &copy; 2025</b></p>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+<nav *ngIf="showHeader()">
+    <div class="header">
+      
+        <!-- Left Section (Greeting & Theme Icon) -->
+        <div class="header-left">
+            <h3>
+                Hello {{ userRole === 'admin' ? 'Admin' : 'User' }}
+                <i class="fa-solid" [ngClass]="isSun ? 'fa-sun' : 'fa-moon'" (click)="toggleIcon()"></i>
+            </h3>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <ng-container *ngIf="userRole === 'admin'; else userHeader">
+                <a routerLink="/admin/dashboard">Dashboard</a>
+                <a routerLink="/admin/view-jobs">View Jobs</a>
+                <a routerLink="/admin/add-job">Add Job</a>
+                <a routerLink="/admin/view-applicants">Applicants</a>
+            </ng-container>
+
+            <!-- User Header -->
+            <ng-template #userHeader>
+                <a routerLink="/user/dashboard">Dashboard</a>
+                <a routerLink="/user/view-jobs">View Jobs</a>
+                <a routerLink="/user/save-resume">Upload Resume</a>
+                <a routerLink="/user/applications">My Applications</a>
+            </ng-template>
+        </div>
+
+        <!-- Right Section (Time & Logout Button) -->
+        <div class="header-right">
+            <h4>12:00 PM</h4>
+            <button class="logout-btn" (click)="onLogout()">Logout</button>
+        </div>
+
+    </div>
+</nav>

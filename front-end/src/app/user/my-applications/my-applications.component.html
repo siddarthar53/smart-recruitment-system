@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <div class="card p-4 shadow-lg border-0 bg-white">
+      <h2 class="h4 fw-bold text-dark mb-3">My Job Applications</h2>
+      <table class="table table-bordered rounded overflow-hidden">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="text-center">Job Title</th>
+            <th class="text-center">Resume Title</th>
+            <th class="text-center">Application Status</th>
+            <th class="text-center">Interview Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let application of jobApplications" class="bg-light text-dark hover-effect">
+            <td class="text-center text-secondary">{{ application.jobTitle }}</td>
+            <td class="text-center text-secondary">{{ application.resumeTitle }}</td>
+            <td class="text-center fw-bold" [ngClass]="getStatusClass(application.status)">
+              {{ application.status }}
+            </td>
+            <td class="text-center">
+              <button 
+                *ngIf="application.status === 'Shortlisted'" 
+                class="interview-btn"
+                (click)="viewInterviewDetails(application)">
+                View Interview
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

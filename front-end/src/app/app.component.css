@@ -1,0 +1,17 @@
+
+p {
+  font-family: Lato;
+}
+  
+.container-fluid{
+  height: 100vh;
+  padding: 0;
+}
+.social-media div{
+  font-size: small;
+  gap: 10px;
+}
+.pointer{
+  cursor: pointer;
+}
+
