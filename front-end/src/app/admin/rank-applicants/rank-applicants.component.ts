@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JobService } from 'src/app/Services/job.service';
+import { DataHandlingService } from 'src/app/Services/data-handling.service';
+import { Job } from 'src/app/models/job.model';
 
 @Component({
   selector: 'app-rank-applicants',
@@ -7,81 +10,116 @@ import { Router } from '@angular/router';
   styleUrls: ['./rank-applicants.component.css']
 })
 export class RankApplicantsComponent implements OnInit {
-  jobTitles = ['Software Engineer', 'Data Scientist', 'Product Manager', 'HR Specialist'];
+  jobTitles: string[] = [];
   selectedJob: string = '';
+  selectedJobId: string = '';
   applicants: any[] = [];
   loading: boolean = false;
   showRankedApplicants: boolean = false;
 
-  constructor(private router:Router) { }
+  constructor(
+    private router: Router,
+    private jobService: JobService,
+    private dataHandlingService: DataHandlingService
+  ) {}
 
-  ngOnInit(): void { }
-
-  // Handle job selection
-  onJobSelect(event: any) {
-    this.selectedJob = event.target.value;
-    this.showRankedApplicants = false; // Reset the table when selecting a new job
+  ngOnInit(): void {
+    this.fetchJobTitles();
   }
 
-  // Simulate ranking applicants using NLP API (Replace with actual backend call)
+  fetchJobTitles() {
+    this.dataHandlingService.getJobs().subscribe(
+      response => {
+        if (response) {
+          this.jobTitles = response.map((job: Job) => job.jobTitle);
+        }
+      },
+      error => {
+        console.error('Error fetching job titles:', error);
+      }
+    );
+  }
+
+  onJobSelect(event: any) {
+    this.selectedJob = event.target.value;
+    this.showRankedApplicants = false;
+
+    // Fetch job ID
+    this.dataHandlingService.getJobs().subscribe(jobs => {
+      const selected = jobs.find((job: any) => job.jobTitle === this.selectedJob);
+      if (selected) {
+        this.selectedJobId = selected._id;
+      }
+    });
+  }
+
   rankApplicants() {
-    if (!this.selectedJob) {
-      alert('Please select a job title first.');
+    if (!this.selectedJobId) {
+      alert('Please select a valid job title.');
       return;
     }
 
     this.loading = true;
     this.showRankedApplicants = false;
 
-    // Simulating API call delay (Replace this with actual HTTP request to backend)
-    setTimeout(() => {
-      this.applicants =
-        [
-          { name: 'John Doe', email: 'johndoe@gmail.com', selected: false },
-          { name: 'Jane Smith', email: 'janesmith@gmail.com', selected: false },
-          { name: 'Michael Brown', email: 'michaelbrown@gmail.com', selected: false },
-          { name: 'Emily Davis', email: 'emilydavis@gmail.com', selected: false },
-          { name: 'Robert White', email: 'robertwhite@gmail.com', selected: false },
-          { name: 'Sophia Green', email: 'sophiagreen@gmail.com', selected: false },
-          { name: 'James Black', email: 'jamesblack@gmail.com', selected: false },
-          { name: 'Olivia Gray', email: 'oliviagray@gmail.com', selected: false },
-          { name: 'William Blue', email: 'williamblue@gmail.com', selected: false },
-          { name: 'Emma Red', email: 'emmaredd@gmail.com', selected: false }
-        ];
-
-      // Randomize ranking order to simulate backend processing
-      this.applicants.sort(() => Math.random() - 0.5);
-
-      this.loading = false;
-      this.showRankedApplicants = true;
-      console.log('Ranked Applicants:', this.applicants);
-    }, 2000); // Simulate a 2-second API response delay
-  }
-
-  // Shortlist selected applicants
-  shortlistApplicants() {
-    const shortlisted = this.applicants.filter(applicant => applicant.selected);
-    console.log("Shortlisted applicants:", shortlisted);
-    // Redirect to shortlist & schedule interviews component
-
-    if (shortlisted.length === 0) {
-      alert('Please select at least one applicant.');
-      return;
-    }
-
-    this.router.navigate(['/admin/shortlist'], {
-      queryParams: {
-        jobTitle: this.selectedJob,
-        applicants: JSON.stringify(shortlisted)
+    this.dataHandlingService.getRankedApplicants(this.selectedJobId).subscribe(
+      (response: any[]) => {
+        this.applicants = response.map(applicant => ({
+          id: applicant._id,
+          name: applicant.name,
+          email: applicant.email,
+          score: applicant.score,
+          selected: false
+        }));
+        console.log("Ranked applicants:", this.applicants);
+        this.loading = false;
+        this.showRankedApplicants = true;
+      },
+      error => {
+        console.error("Error ranking applicants:", error);
+        this.loading = false;
       }
-    });
+    );
   }
 
-  // Handle checkbox selection
   onCheckboxChange(event: Event, index: number) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement) {
       this.applicants[index].selected = inputElement.checked;
     }
+  }
+
+  shortlistApplicants() {
+    const selectedApplicants = this.applicants.filter(app => app.selected);
+    console.log("Selected applicants for shortlist:", selectedApplicants);
+
+    if (selectedApplicants.length === 0) {
+      alert("Please select at least one applicant to shortlist.");
+      return;
+    }
+
+    const payload = {
+      jobId: this.selectedJobId,
+      applicantIds: selectedApplicants.map(app => app.id)
+    };
+
+    console.log("Payload being sent:", payload);
+
+
+    this.dataHandlingService.shortlistApplicants(payload).subscribe(
+      res => {
+        alert("✅ Applicants shortlisted successfully!");
+        this.router.navigate(['/admin/shortlist'], {
+          queryParams: {
+            jobTitle: this.selectedJob,
+            applicants: JSON.stringify(selectedApplicants)
+          }
+        });
+      },
+      err => {
+        console.error("❌ Error shortlisting applicants:", err);
+        alert("Error occurred while shortlisting applicants.");
+      }
+    );
   }
 }

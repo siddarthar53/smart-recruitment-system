@@ -20,16 +20,22 @@
       
       <ul class="list-group">
         <li *ngFor="let resume of savedResumes" class="list-group-item d-flex justify-content-between align-items-center">
-          <a href="#" (click)="viewResume(resume.url)" class="resume-link">{{ resume.title }}</a>
-          <button class="delete-btn" (click)="deleteResume(resume.title)">🗑 Delete</button>
+          <!-- ✅ Open resume in new tab -->
+          <a [href]="resume.s3Bucket?.s3Url" target="_blank" class="resume-link">
+            {{ resume.resumeTitle }}
+          </a>
+
+          <button class="delete-btn" (click)="deleteResume(resume._id)">🗑 Delete</button>
         </li>
       </ul>
     </div>
+
   
     <!-- Resume PDF Viewer -->
-    <div *ngIf="selectedResume" class="card p-4 shadow-lg border-0 bg-white mt-4">
+    <div *ngIf="selectedResumeUrl" class="card p-4 shadow-lg border-0 bg-white mt-4">
       <h2 class="h4 fw-bold text-dark mb-3">Viewing: {{ selectedResumeTitle }}</h2>
-      <iframe [src]="selectedResume" class="resume-viewer"></iframe>
+      <iframe [src]="selectedResumeUrl" class="resume-viewer" width="100%" height="600px"></iframe>
     </div>
+
   </div>
   

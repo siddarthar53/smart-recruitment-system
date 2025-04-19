@@ -14,10 +14,17 @@
   
       <!-- Progress Bar for Status -->
       <div class="progress my-4">
-        <div class="progress-bar" [ngStyle]="{'width': progressWidth}" [ngClass]="progressClass">
+        <div 
+          class="progress-bar text-white"
+          [ngStyle]="{ width: progressWidth }"
+          [class.bg-warning]="progressClass === 'bg-warning'"
+          [class.bg-info]="progressClass === 'bg-info'"
+          [class.bg-success]="progressClass === 'bg-success'"
+          [class.bg-secondary]="progressClass === 'bg-secondary'">
           {{ interview.status }}
         </div>
       </div>
+      
   
       <!-- Countdown Timer -->
       <div class="mb-3 text-center">

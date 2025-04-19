@@ -1,0 +1,43 @@
+.chart-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.chart-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(50% - 24px); /* Two cards per row with gap */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+}
+
+.chart-card h4 {
+  font-size: 17px;
+  margin-bottom: 14px;
+  text-align: center;
+  color: #444;
+}
+
+canvas {
+  max-width: 280px;
+  max-height: 280px;
+  display: block;
+  margin: 0 auto 16px auto;
+}
+
+/* 🔤 Smaller Legend Labels */
+.legend {
+  margin-top: 10px;
+  font-size: 12px; /* Smaller labels */
+  color: #555;
+  line-height: 1.4;
+}

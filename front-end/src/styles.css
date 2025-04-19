@@ -39,3 +39,9 @@ label{
 .simple-keyboard {
   max-width: 850px;
 }
+/* label {
+  color: var(--label-color, #000000);
+}   
+div {
+  background-color: var(--div-bg, #fff);
+} */

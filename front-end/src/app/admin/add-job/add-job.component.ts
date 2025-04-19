@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { JobService } from '../../Services/job.service';
 
 @Component({
   selector: 'app-add-job',
@@ -7,38 +8,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddJobComponent implements OnInit {
   
-  title: string = '';
-  location: string = '';
-  jobType: string = 'Full Time';
-  salary: string = '';
-  eligibility: string = '';
-  skillsRequired: string = ''; // ✅ Added Skills Field
-  jobDescription: string = '';
-  jobImage: File | null = null;
+  title = '';
+  location = '';
+  jobType = 'Full Time';
+  salary = '';
+  eligibility = '';
+  skillsRequired = '';
+  noOfOpenings: number = 1;  // Default to 1
+  jobDescription = '';
+  jobFile: File | null = null;
 
-  constructor() { }
+  @ViewChild('fileUploader') fileUploader!: ElementRef;
 
-  ngOnInit(): void { }
+  constructor(private jobService: JobService) {}
+
+  ngOnInit(): void {}
 
   onFileSelected(event: any) {
-    this.jobImage = event.target.files[0];
+    this.jobFile = event.target.files[0];
   }
 
   onSubmit() {
+    if (!this.jobFile) {
+      alert('Please upload a job file');
+      return;
+    }
+
     const newJob = {
       title: this.title,
       location: this.location,
       jobType: this.jobType,
       salary: this.salary,
       eligibility: this.eligibility,
-      skillsRequired: this.skillsRequired, // ✅ Include skills
+      skillsRequired: this.skillsRequired,
       jobDescription: this.jobDescription,
-      jobImage: this.jobImage
+      noOfOpenings: this.noOfOpenings,  // ✅ Now included
+      jobFile: this.jobFile
     };
 
-    console.log("New job added:", newJob);
+    this.jobService.addJob(newJob).subscribe(
+      response => {
+        console.log('✅ Job added successfully', response);
+        alert('Job added successfully!');
+        this.resetForm();
+      },
+      error => {
+        console.error('❌ Error adding job:', error);
+        alert('Failed to add job');
+      }
+    );
+  }
 
-    // Reset Form
+  resetForm() {
     this.title = '';
     this.location = '';
     this.jobType = 'Full Time';
@@ -46,6 +67,7 @@ export class AddJobComponent implements OnInit {
     this.eligibility = '';
     this.skillsRequired = '';
     this.jobDescription = '';
-    this.jobImage = null;
+    this.jobFile = null;
+    this.fileUploader.nativeElement.value = '';  // Reset the file input
   }
 }

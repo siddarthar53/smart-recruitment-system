@@ -18,8 +18,8 @@
             <p><i class="fa-solid fa-location-dot"></i> LOCATION <span>{{ job?.location }}</span></p>
             <p><i class="fa-solid fa-dollar-sign"></i> SALARY <span>{{ job?.salary }}</span></p>
             <p><i class="fa-solid fa-shield-alt"></i> ELIGIBILITY <span>{{ job?.eligibility }}</span></p>
-            <p><i class="fa-solid fa-clock"></i> POSTED <span>{{ job?.createdAt }}</span></p>
-            <p><i class="fa-solid fa-users"></i> NO OF OPENINGS <span>{{ job?.eligibility}}</span></p>
+            <p><i class="fa-solid fa-clock"></i> POSTED <span>{{ postedAgo }}</span></p>
+            <p><i class="fa-solid fa-users"></i> NO OF OPENINGS <span>{{ job?.noOfOpenings}}</span></p>
         </div>
 
         <!-- Job Description and Skills -->
@@ -33,11 +33,11 @@
                 <p>{{ job?.skillsRequired }}</p>
             </div>
 
-            <!-- Conditionally Render Apply Section (Only for Users) -->
+                <!-- Conditionally Render Apply Section (Only for Users) -->
             <div *ngIf="userRole === 'user'" class="apply-section">
                 <label for="resume">Select Resume:</label>
                 <select id="resume" [(ngModel)]="selectedResume">
-                    <option *ngFor="let resume of userResumes" [value]="resume">{{ resume }}</option>
+                    <option *ngFor="let resume of userResumes" [value]="resume.resumeId">{{ resume.resumeTitle}}</option>
                 </select>
                 <button class="apply-btn" (click)="applyForJob()">Apply</button>
             </div>

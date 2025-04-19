@@ -31,6 +31,10 @@
                 <label>SKILLS REQUIRED</label>
                 <input type="text" [(ngModel)]="skillsRequired" placeholder="e.g. JavaScript, Python, AWS">
             </div>
+            <div class="form-item">
+                <label>NUMBER OF OPENINGS</label>
+                <input type="number" [(ngModel)]="noOfOpenings" placeholder="e.g. 5">
+            </div>            
         </div>
 
         <div class="form-item full-width">
@@ -39,9 +43,8 @@
         </div>
 
         <div class="form-item full-width">
-            <label>JOB BANNER IMAGE</label>
-            <input type="file" (change)="onFileSelected($event)">
-            <p>Max file size 2 MB. Allowed file format: JPG, PNG</p>
+            <label>JOB FILE</label>
+            <input type="file" #fileUploader (change)="onFileSelected($event)">
         </div>
 
         <button class="submit-btn" (click)="onSubmit()">SUBMIT A JOB</button>

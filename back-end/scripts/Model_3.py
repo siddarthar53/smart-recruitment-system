@@ -5,8 +5,10 @@
 
 
 import os
+import sys
 import glob
 import docx
+import json
 import PyPDF2
 import pytesseract
 import pdfplumber
@@ -90,35 +92,43 @@ def extract_years_of_experience(text):
     return int(match.group(1)) if match else 0
 
 # Load job description & extract key skills
-job_desc_file = r"C:\Users\siddu\OneDrive\Desktop\Job Recruitment System\resume\job_desciption.docx"
-resumes_folder = r"C:\Users\siddu\OneDrive\Desktop\sample-testing"
 
-print(f"Reading job description file: {job_desc_file}")
+
+# Get file paths from command-line arguments
+job_desc_file = sys.argv[1]  # Job description file path
+resumes_folder = sys.argv[2]  # Resumes folder path
+
+
+# job_desc_file = r"C:\Users\siddu\OneDrive\Desktop\Job Recruitment System\resume\job_desciption.docx"
+# job_desc_file=r"C:\Users\siddu\OneDrive\Desktop\job_desciption.docx"
+# resumes_folder = r"C:\Users\siddu\OneDrive\Desktop\sample-testing"
+
+# print(f"Reading job description file: {job_desc_file}")
 job_desc_text = read_text_from_file(job_desc_file)
 
 if not job_desc_text:
-    print("Error: No valid job description text found.")
+    # print("Error: No valid job description text found.")
     exit(1)
 
 # Extract required skills from job description
 REQUIRED_SKILLS = extract_skills_from_job_desc(job_desc_text)
-print("\nExtracted Key Skills:", REQUIRED_SKILLS)
+# print("\nExtracted Key Skills:", REQUIRED_SKILLS)
 
 # Process resumes
 resumes_texts = process_resumes_folder(resumes_folder)
 
 if not resumes_texts:
-    print("Error: No valid resumes found in the folder.")
+    # print("Error: No valid resumes found in the folder.")
     exit(1)
 
 # Encode job description
-print("\nEncoding job description...")
+# print("\nEncoding job description...")
 job_desc_embedding = model.encode(job_desc_text, convert_to_tensor=True)
 
 # Compute similarity scores
 resume_scores = {}
 
-print("\nProcessing resumes and calculating scores...")
+# print("\nProcessing resumes and calculating scores...")
 for file, text in resumes_texts.items():
     resume_embedding = model.encode(text, convert_to_tensor=True)
     cosine_sim = util.cos_sim(job_desc_embedding, resume_embedding).item()
@@ -131,19 +141,23 @@ for file, text in resumes_texts.items():
 
     # Final weighted score
     final_score = (0.6 * cosine_sim) + (0.3 * matched_skills) + (0.1 * years_experience / 10)
-    resume_scores[file] = final_score
+    file_name = os.path.basename(file)  # Extract just the filename
+    resume_scores[file_name] = final_score
 
 # Rank resumes
 ranked_resumes = sorted(resume_scores.items(), key=lambda x: x[1], reverse=True)
+# --- Final output only ---
+print(json.dumps(resume_scores))  # No indent, no extra prints
 
-# Print results
-print("\nFinal Ranked Resumes:")
-for rank, (file, score) in enumerate(ranked_resumes, start=1):
-    print(f"{rank}. {file}: {score:.4f}")
 
-# Best match
-best_match = ranked_resumes[0]
-print(f"\nMost Suitable Resume: {best_match[0]} with a similarity score of {best_match[1]:.4f}")
+# # Print results
+# print("\nFinal Ranked Resumes:")
+# for rank, (file, score) in enumerate(ranked_resumes, start=1):
+#     print(f"{rank}. {file}: {score:.4f}")
+
+# # Best match 
+# best_match = ranked_resumes[0]
+# print(f"\nMost Suitable Resume: {best_match[0]} with a similarity score of {best_match[1]:.4f}")
 
 
 # In[ ]:

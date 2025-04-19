@@ -8,7 +8,10 @@ import { ViewApplicantsComponent } from './view-applicants/view-applicants.compo
 import { RankApplicantsComponent } from './rank-applicants/rank-applicants.component';
 import { SchedulingInterviewComponent } from './scheduling-interview/scheduling-interview.component';
 import { ViewApplicantComponent } from './view-applicant/view-applicant.component';
-import { SharedModule } from '../shared/shared.module'; 
+import { SharedModule } from '../shared/shared.module';
+import { AnalyticsComponent } from './analytics/analytics.component'; 
+import { ChartsModule } from 'ng2-charts';
+// import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -17,13 +20,16 @@ import { SharedModule } from '../shared/shared.module';
     ViewApplicantsComponent,
     RankApplicantsComponent,
     SchedulingInterviewComponent,
-    ViewApplicantComponent
+    ViewApplicantComponent,
+    AnalyticsComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    ChartsModule, // Import ChartsModule for charts
+    // NgChartsModule
   ],
 })
 export class AdminModule { }

@@ -20,6 +20,7 @@
   .progress-bar {
     font-size: 14px;
     font-weight: bold;
+    transition: width 0.6s ease;
   }
   
   /* Interview Info */

@@ -1,20 +1,22 @@
 <div class="container-fluid">
     <div class="operations">
         <div class="sort">
-            <button>Sort</button>
+            <button (click)="toggleSort('jobTitle')">
+                Sort by Title ({{ sortDirection === 'asc' ? '⬆️' : '⬇️' }})
+              </button>
         </div>
         <div class="search">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." [(ngModel)]="searchText">
         </div>
     </div>
     
     <div class="jobs-container">
         <ul>
-            <li *ngFor="let job of jobs" (click)="navigateToJobDetails(job._id)">
+            <li *ngFor="let job of filteredJobs" (click)="navigateToJobDetails(job._id)">
                 <div class="job pointer">
-                    <div class="job-img">
+                    <!-- <div class="job-img">
                         <img src="../../../assets/job-placeholder.jpg" alt="Job Image" width="100px" height="100px">
-                    </div>
+                    </div> -->
                     <div class="job-text">
                         <h4>{{ job?.jobTitle }}</h4>
                         <div class="details">
@@ -30,5 +32,9 @@
                 </div>
             </li>
         </ul>
+        <div *ngIf="filteredJobs.length === 0" class="no-results">
+            No jobs match your search.
+          </div>
+          
     </div>
 </div>

@@ -8,6 +8,7 @@ import { ViewApplicantsComponent } from './view-applicants/view-applicants.compo
 import { ViewApplicantComponent } from './view-applicant/view-applicant.component';
 import { RankApplicantsComponent } from './rank-applicants/rank-applicants.component';
 import { SchedulingInterviewComponent } from './scheduling-interview/scheduling-interview.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
 
 const routes: Routes = [ 
   { path: 'dashboard', component: AdminDashboardComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'view-applicants', component: ViewApplicantsComponent },
   { path: 'view-applicant', component: ViewApplicantComponent },
   { path: 'rank-applicants', component: RankApplicantsComponent },
-  { path: 'shortlist', component: SchedulingInterviewComponent }
+  { path: 'shortlist', component: SchedulingInterviewComponent },
+  { path:'analytics',component: AnalyticsComponent}
 ];
 
 @NgModule({

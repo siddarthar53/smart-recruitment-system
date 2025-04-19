@@ -15,7 +15,7 @@
                 <a routerLink="/admin/dashboard">Dashboard</a>
                 <a routerLink="/admin/view-jobs">View Jobs</a>
                 <a routerLink="/admin/add-job">Add Job</a>
-                <a routerLink="/admin/view-applicants">Applicants</a>
+                <!-- <a routerLink="/admin/view-applicants">Applicants</a> -->
             </ng-container>
 
             <!-- User Header -->
@@ -29,7 +29,7 @@
 
         <!-- Right Section (Time & Logout Button) -->
         <div class="header-right">
-            <h4>12:00 PM</h4>
+            <h4>{{ currentTime | date:'hh:mm a'}}</h4>
             <button class="logout-btn" (click)="onLogout()">Logout</button>
         </div>
 

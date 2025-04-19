@@ -44,8 +44,11 @@ export class LoginComponent implements OnInit {
         console.log('Login successful:', response);
         localStorage.setItem('user',JSON.stringify(response.user));
         localStorage.setItem('token', response.token);  // Store JWT if applicable
+
+        // 🔥 Add this line to notify the app about the new user role
+        this.authService.setUserRole(response.user.role);
         alert('Login successful');
-        this.router.navigate([`/${response.user.role}`]);  // Navigate to dashboard or home page
+        this.router.navigate([`/${response.user.role}/dashboard`]);  // Navigate to dashboard or home page
       },
       (error) => {
         console.error('Login failed:', error);

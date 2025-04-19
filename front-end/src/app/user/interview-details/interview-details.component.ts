@@ -19,20 +19,25 @@ export class InterviewDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.interview = JSON.parse(params['interview']);
-      
+  
       if (this.interview.bannerImage) {
         this.jobBanner = this.interview.bannerImage;
       }
-
+  
+      console.log('Interview Details:', this.interview);
+  
       this.updateProgressBar();
       this.generateGoogleCalendarLink();
       this.calculateCountdown();
-      
+  
+      // Refresh countdown & progress every second
       setInterval(() => {
         this.calculateCountdown();
+        this.updateProgressBar();
       }, 1000);
     });
   }
+  
 
   /** Calculate Time Remaining Until Interview */
   calculateCountdown() {
@@ -60,24 +65,28 @@ export class InterviewDetailsComponent implements OnInit {
     this.googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${startDateTime}/${endDateTime}`;
   }
 
-  /** Update Progress Bar Based on Status */
-  updateProgressBar() {
-    switch (this.interview.status) {
-      case 'Under Review':
-        this.progressWidth = '30%';
-        this.progressClass = 'bg-warning';
-        break;
-      case 'Shortlisted':
-        this.progressWidth = '70%';
-        this.progressClass = 'bg-info';
-        break;
-      case 'Interview Scheduled':
-        this.progressWidth = '100%';
-        this.progressClass = 'bg-success';
-        break;
-      default:
-        this.progressWidth = '0%';
-        this.progressClass = 'bg-secondary';
-    }
+  /** Update Progress Bar Based on Time Until Interview */
+updateProgressBar() {
+  const interviewStart = new Date(`${this.interview.date} ${this.interview.timeSlot.split(' - ')[0]}`).getTime();
+  const interviewEnd = new Date(`${this.interview.date} ${this.interview.timeSlot.split(' - ')[1]}`).getTime();
+  const now = new Date().getTime();
+
+  const totalDuration = interviewStart - now > 0 ? interviewStart - now : 1; // Avoid division by 0
+  const fullSpan = interviewStart - (new Date().setHours(0, 0, 0, 0)); // Midnight to interview start
+  const elapsed = fullSpan - totalDuration;
+
+  const progress = Math.min(100, Math.max(0, (elapsed / fullSpan) * 100));
+  this.progressWidth = `${progress.toFixed(2)}%`;
+
+  if (progress < 50) {
+    this.progressClass = 'bg-warning';
+  } else if (progress < 90) {
+    this.progressClass = 'bg-info';
+  } else {
+    this.progressClass = 'bg-success';
   }
+
+  console.log('Progress Width:', this.progressWidth, 'Class:', this.progressClass);
+}
+
 }

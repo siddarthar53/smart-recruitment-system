@@ -1,0 +1,31 @@
+<div class="analytics">
+  <h2>Applicants Status</h2>
+  <div class="chart-section">
+    <div *ngFor="let job of applicantsData" class="chart-card">
+      <h4>{{ job.jobTitle }}</h4>
+      <canvas baseChart
+        [data]="getPieChartData(job)"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [legend]="true"
+        [colors]="getPieChartColors()">
+      </canvas>
+      <div class="legend">
+        <div><strong>Shortlisted:</strong> {{ job.statusCounts.shortlisted.join(', ') || 'None' }}</div>
+        <div><strong>Under Review:</strong> {{ job.statusCounts.underReview.join(', ') || 'None' }}</div>
+        <div><strong>Rejected:</strong> {{ job.statusCounts.rejected.join(', ') || 'None' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2>Upcoming Interviews</h2>
+  <div *ngIf="interviews.length === 0">No upcoming interviews</div>
+  <ul class="interview-list">
+    <li *ngFor="let i of interviews">
+      <strong>{{ i.jobTitle }}</strong> with {{ i.candidate }} on {{ i.date | date:'medium' }}
+      at {{ i.location }}
+    </li>
+  </ul>
+</div>

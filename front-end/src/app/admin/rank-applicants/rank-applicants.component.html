@@ -2,7 +2,7 @@
   <!-- Job Selection Dropdown -->
   <div class="card p-4 mb-4 shadow-lg border-0 bg-dark text-white">
     <label for="jobSelect" class="form-label fw-bold text-white">Select Job Title</label>
-    <select id="jobSelect" class="form-control border-0 shadow-sm bg-light text-dark" (change)="onJobSelect($event)">
+    <select id="jobSelect" class="border-0 shadow-sm bg-light text-dark p-2 rounded" (change)="onJobSelect($event)">
       <option value="" disabled selected>Select a Job</option>
       <option *ngFor="let job of jobTitles" [value]="job">{{ job }}</option>
     </select>

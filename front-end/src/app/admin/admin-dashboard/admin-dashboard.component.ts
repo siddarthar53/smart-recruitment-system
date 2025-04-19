@@ -18,9 +18,7 @@ export class AdminDashboardComponent implements OnInit {
     {
       title: 'Resume Ranking',
       items:[
-        { name: 'View no of applicants.', route: '/admin/view-applicants' },
-        { name: 'Rank the candidates.', route: 'admin/rank-applicants' },
-        { name: 'Shortlist and schedule interviews.', route: 'admin/schedule-interview' }
+        { name: 'Rank the candidates.', route: 'admin/rank-applicants' }
       ]
     },
     {
