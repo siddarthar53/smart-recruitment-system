@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } =require("@google/generative-ai");
 const fs=require('fs');
 
 // Initialize the GoogleGenerativeAI model
-const genAI = new GoogleGenerativeAI("AIzaSyBSJ4GtEKVC3gVzaJBP6t10ps80z0mcdy4");
+const genAI = new GoogleGenerativeAI("");
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 function fileToGenerativePart(path, mimeType) {
